@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from math import sqrt
 
 users3 = {"David": {"Imagine Dragons": 3, "Daft Punk": 5,
@@ -19,8 +17,8 @@ def computeSimilarity(band1, band2, userRatings):
     for (key, ratings) in userRatings.items():
         averages[key] = (float(sum(ratings.values())) / len(ratings.values()))
 
-    num = 0 # 分子
-    dem1 = 0 # 分母的第一部分
+    num = 0 
+    dem1 = 0
     dem2 = 0
     for (user, ratings) in userRatings.items():
         if band1 in ratings and band2 in ratings:
@@ -33,4 +31,3 @@ def computeSimilarity(band1, band2, userRatings):
 print computeSimilarity('Kacey Musgraves', 'Lorde', users3)
 print computeSimilarity('Imagine Dragons', 'Lorde', users3)
 print computeSimilarity('Daft Punk', 'Lorde', users3)
-
