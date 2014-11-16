@@ -46,7 +46,8 @@ def manhattan(rating1, rating2):
 
 
 def computeNearestNeighbor(username, users):
-    """creates a sorted list of users based on their distance to username"""
+    """creates a sorted list of users based on their distance to username
+    it's both suitable for users and music"""
     distances = []
     for user in users:
         if user != username:
