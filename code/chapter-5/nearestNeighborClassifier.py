@@ -72,11 +72,8 @@ class Classifier:
                 elif self.format[i] == 'class':
                     classification = fields[i]
             self.data.append((classification, vector, ignore))
-        # self.rawData is never used, why declare it?
         self.rawData = list(self.data)
         # get length of instance vector
-        # len(self.data[0][1]) = 2, 
-        # namely the number of columns need to be normalized
         self.vlen = len(self.data[0][1])
         # now normalize the data
         for i in range(self.vlen):

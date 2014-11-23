@@ -40,19 +40,50 @@ class Classifier:
     ##################################################
     ###
     ###  FINISH THE FOLLOWING TWO METHODS
-
     def getMedian(self, alist):
         """return median of alist"""
-
-        """TO BE DONE"""
-        return 0
+        if alist == []:
+            return []
+        blist = sorted(alist)
+        length = len(alist)
+        if length % 2 == 1:
+            # length of list is odd so return middle element
+            return blist[int(((length + 1) / 2) -  1)]
+        else:
+            # length of list is even so compute midpoint
+            v1 = blist[int(length / 2)]
+            v2 =blist[(int(length / 2) - 1)]
+            return (v1 + v2) / 2.0
         
 
     def getAbsoluteStandardDeviation(self, alist, median):
         """given alist and median return absolute standard deviation"""
+        sum = 0
+        for item in alist:
+            sum += abs(item - median)
+        return sum / len(alist)
 
-        """TO BE DONE"""
-        return 0
+
+    def normalizeColumn(self, columnNumber):
+       """given a column number, normalize that column in self.data"""
+       # first extract values to list
+       col = [v[1][columnNumber] for v in self.data]
+       median = self.getMedian(col)
+       asd = self.getAbsoluteStandardDeviation(col, median)
+       #print("Median: %f   ASD = %f" % (median, asd))
+       self.medianAndDeviation.append((median, asd))
+       for v in self.data:
+           v[1][columnNumber] = (v[1][columnNumber] - median) / asd
+
+
+    def normalizeVector(self, v):
+        """We have stored the median and asd for each column.
+        We now use them to normalize vector v"""
+        vector = list(v)
+        for i in range(len(vector)):
+            (median, asd) = self.medianAndDeviation[i]
+            vector[i] = (vector[i] - median) / asd
+        return vector
 
     
     ###
